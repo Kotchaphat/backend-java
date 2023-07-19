@@ -12,38 +12,48 @@ public class Employee {
 	public Employee() {
 		super();
 	}
-	
-	
+
 	public Integer getEmployeeID() {
 		return employeeID;
 	}
-	public void setEmployeeID(Integer employeeID) {
-		this.employeeID = employeeID;
+
+	public void setEmployeeID(Integer EmployeeID) {
+		employeeID = EmployeeID;
 	}
+
 	public String getFirstName() {
 		return firstName;
 	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
 	public String getLastName() {
 		return lastName;
 	}
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
 	public Integer getSalary() {
 		return salary;
 	}
+
 	public void setSalary(Integer salary) {
 		this.salary = salary;
 	}
-	public Employee(Integer employeeID, String firstName, String lastName, Integer salary) {
+
+	public Employee(Integer EmployeeID, String FirstName, String LastName, Integer Salary) {
 		super();
-		this.employeeID = employeeID;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.salary = salary;
+		this.employeeID = EmployeeID;
+		this.firstName = FirstName;
+		this.lastName = LastName;
+		this.salary = Salary;
 	}
-	}
+	
+}
+	
+	
 
