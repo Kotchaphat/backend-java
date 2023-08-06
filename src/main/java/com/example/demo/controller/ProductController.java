@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.demo.model.Product;
 
@@ -39,22 +40,18 @@ public class ProductController {
 	}
 		return null;
 }
+	
 	@PutMapping("/product/{ProductID}")
-	public Product updatProduct (@PathVariable Integer ProductID,@RequestBody Product body) {
+	public String updatProduct (@PathVariable Integer ProductID,@RequestBody Product body) {
 		for (int i =0; i <data.size();i++) {
-			if(ProductID == data.get(i).getProductID()){
-				data.get(i).setProductID(body.getProductID());
-				data.get(i).setProductName(body.getProductName());
-				data.get(i).setProductPrice(body.getProductPrice());
-				data.get(i).setProductDetail(body.getProductDetail());
-				data.get(i).setProductAmount(body.getProductAmount());
-				
-				return data.get(i);
+				if(data.get(i).getProductID().equals(ProductID)) {
+					body.setProductID(ProductID);
+		            data.set(i, body);
+					return "Update Product Success";
+				}
 			}
-		
-	}
-		return null;
-	}
+			return "Error Update Product";
+		}
 
 	@DeleteMapping("/product/{ProductID}")
 	public String deleteProduct(@PathVariable Integer ProductID) {
@@ -67,4 +64,23 @@ public class ProductController {
 		return "delete unsuccessfully";
 
 }
-}
+	@GetMapping("/searchProduct")
+	public List<Product> getProductsBySearch(
+		@RequestParam(value = "ProductName", required = false) String productName,
+		@RequestParam(value = "ProductDetail", required = false) String productDetail) {
+
+		List<Product> listFound = new ArrayList<>();
+
+		for (Product product : data) {
+			if ((productName != null && !productName.isEmpty() && product.getProductName().contains(productName)) ||
+					(productDetail != null && !productDetail.isEmpty() && product.getProductDetail().contains(productDetail))) {
+				listFound.add(product);
+			}
+		}
+
+		return listFound;
+	}
+	
+	}
+	
+
